@@ -178,6 +178,90 @@
       0%, 100% { opacity: 0; transform: scale(0); }
       50% { opacity: 1; transform: scale(1); }
     }
+        .card {
+      text-align: center;
+      color: white;
+      padding: 2rem;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      width: 90%;
+      max-width: 600px;
+      margin: 20px;
+    }
+
+    .countdown {
+      font-size: clamp(1.5em, 5vw, 2em);
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255,255,255,0.5);
+      padding: 15px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .year {
+      font-size: clamp(4em, 15vw, 6em);
+      font-weight: bold;
+      margin: 20px 0;
+      background: linear-gradient(
+        45deg,
+        #FF0000,
+        #FF7F00,
+        #FFFF00,
+        #00FF00,
+        #0000FF,
+        #4B0082,
+        #8F00FF
+      );
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient 5s ease infinite;
+      filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+    }
+
+    .message {
+      font-size: clamp(1.2em, 4vw, 1.5em);
+      margin: 20px 0;
+      color: #fff;
+      text-shadow: 0 0 5px rgba(255,255,255,0.5);
+    }
+
+    .icon-row {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      gap: clamp(15px, 4vw, 20px);
+    }
+
+    .icon-row i {
+      font-size: clamp(1.5em, 5vw, 2em);
+      color: gold;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .signature {
+      margin-top: 30px;
+      font-size: clamp(1.5em, 6vw, 2em);
+      color: #FFD700;
+      font-style: italic;
+      text-shadow: 0 0 10px rgba(255,215,0,0.5);
+      letter-spacing: 2px;
+      padding: 10px;
+      border-top: 1px solid rgba(255,215,0,0.3);
+      animation: signatureGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes signatureGlow {
+      0%, 100% { text-shadow: 0 0 10px rgba(255,215,0,0.5); }
+      50% { text-shadow: 0 0 20px rgba(255,215,0,0.8); }
+    }
   </style>
 </head>
 <body>
@@ -204,7 +288,7 @@
       <i class="fas fa-music"></i>
     </div>
     <div class="message">
-      May your arduous journey lead you starward
+      May this arduous journey <br> lead you starward
       <i class="fas fa-star"></i>
     </div>
     <div style="
