@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/firacode/6.2.0/fira_code.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #000;
+      font-family: 'Fira Code', monospace;
+      overflow: hidden;
+    }
+
+    .card {
+      text-align: center;
+      color: white;
+      padding: 2rem;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+      animation: rotate 20s linear infinite;
+      z-index: -1;
+    }
+
+    .countdown {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255,255,255,0.5);
+      padding: 15px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .year {
+      font-size: 6em;
+      font-weight: bold;
+      margin: 20px 0;
+      background: linear-gradient(
+        45deg,
+        #FF0000,
+        #FF7F00,
+        #FFFF00,
+        #00FF00,
+        #0000FF,
+        #4B0082,
+        #8F00FF
+      );
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient 5s ease infinite;
+      filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+    }
+
+    .message {
+      font-size: 1.5em;
+      margin: 20px 0;
+      color: #fff;
+      text-shadow: 0 0 5px rgba(255,255,255,0.5);
+    }
+
+    .decorations {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+
+    .decoration {
+      position: absolute;
+      animation: float 3s ease-in-out infinite;
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 1.5em;
+    }
+
+    .icon-row {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .icon-row i {
+      font-size: 1.5em;
+      color: gold;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .firework {
+      position: fixed;
+      border-radius: 50%;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.2); opacity: 1; }
+    }
+
+    @keyframes explode {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(30);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fireworkTrail {
+      0% {
+        transform: translateY(100vh);
+        opacity: 1;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(var(--targetY));
+        opacity: 0;
+      }
+    }
+
+    .highlight {
+      color: #FFD700;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: white;
+      border-radius: 50%;
+      animation: sparkle 1.5s linear infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="decorations">
+      <i class="decoration fas fa-star" style="top: 10%; left: 10%"></i>
+      <i class="decoration fas fa-moon" style="top: 20%; right: 15%"></i>
+      <i class="decoration fas fa-snowflake" style="bottom: 15%; left: 15%"></i>
+      <i class="decoration fas fa-glass-cheers" style="bottom: 20%; right: 10%"></i>
+    </div>
+    <div class="countdown">
+      <div id="timer">Loading countdown...</div>
+    </div>
+    <div class="year">2025</div>
+    <div class="message">
+      HAPPY NEW YEAR!<br>
+      Let's celebrate together
+    </div>
+    <div class="icon-row">
+      <i class="fas fa-gift"></i>
+      <i class="fas fa-champagne-glasses"></i>
+      <i class="fas fa-party-horn"></i>
+      <i class="fas fa-music"></i>
+    </div>
+    
+    <div class="message">
+      HAPPY NEW YEAR!<br>
+      Let's celebrate together
+    </div>
+    <div class="icon-row">
+      <i class="fas fa-gift"></i>
+      <i class="fas fa-champagne-glasses"></i>
+      <i class="fas fa-party-horn"></i>
+      <i class="fas fa-music"></i>
+    </div>
+    <div style="
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #FFD700;
+      font-style: italic;
+      text-shadow: 0 0 5px rgba(255,215,0,0.3);
+      letter-spacing: 2px;
+    ">
+      By Abiinkun
+    </div>
+  </div>
+  </div>
+
+  <script>
+    // Add sparkles
+    function createSparkle() {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.style.left = Math.random() * window.innerWidth + 'px';
+      sparkle.style.top = Math.random() * window.innerHeight + 'px';
+      document.body.appendChild(sparkle);
+      
+      setTimeout(() => sparkle.remove(), 1500);
+    }
+
+    setInterval(createSparkle, 200);
+
+    function updateCountdown() {
+      const now = new Date();
+      const newYear = new Date('January 1, 2025');
+      const diff = newYear - now;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('timer').innerHTML = `
+        <span class="highlight">${days}</span>d 
+        <span class="highlight">${hours}</span>h 
+        <span class="highlight">${minutes}</span>m 
+        <span class="highlight">${seconds}</span>s
+      `;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    function createFirework() {
+      const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffffff'];
+      
+      const trail = document.createElement('div');
+      trail.className = 'firework';
+      trail.style.width = '4px';
+      trail.style.height = '4px';
+      trail.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      trail.style.left = Math.random() * window.innerWidth + 'px';
+      trail.style.setProperty('--targetY', Math.random() * 60 + 20 + 'vh');
+      trail.style.animation = 'fireworkTrail 1s ease-out forwards';
+      
+      document.body.appendChild(trail);
+      
+      setTimeout(() => {
+        const explosion = document.createElement('div');
+        explosion.className = 'firework';
+        explosion.style.width = '4px';
+        explosion.style.height = '4px';
+        explosion.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        explosion.style.left = trail.style.left;
+        explosion.style.top = `calc(${trail.style.getPropertyValue('--targetY')} - 2px)`;
+        explosion.style.animation = 'explode 0.8s ease-out forwards';
+        
+        document.body.appendChild(explosion);
+        
+        for (let i = 0; i < 20; i++) {
+          const particle = document.createElement('div');
+          particle.className = 'firework';
+          particle.style.width = '2px';
+          particle.style.height = '2px';
+          particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          particle.style.left = explosion.style.left;
+          particle.style.top = explosion.style.top;
+          particle.style.transform = `rotate(${i * 18}deg)`;
+          particle.style.animation = 'explode 0.8s ease-out forwards';
+          document.body.appendChild(particle);
+        }
+
+        setTimeout(() => {
+          trail.remove();
+          explosion.remove();
+        }, 1000);
+      }, 1000);
+    }
+
+    setInterval(createFirework, 500);
+  </script>
+</body>
+</html>
