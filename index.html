@@ -50,7 +50,17 @@
       border-radius: 10px;
       background: rgba(0, 0, 0, 0.3);
     }
-
+    .hny{
+	font-size: 3em;
+      font-weight: bold;
+      margin: 20px 0;
+      background: white;
+      background-size: 180% 180%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient 5s ease infinite;
+      filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+	}
     .year {
       font-size: 6em;
       font-weight: bold;
@@ -275,13 +285,13 @@
     <div class="countdown">
       <div id="timer">Loading countdown...</div>
     </div>
+	<div class="hny">HAPPY NEW YEAR!<br></div>
     <div class="year">2025</div>
     
-    <div class="message">
-      HAPPY NEW YEAR!<br>
-      Let's celebrate together
+    <div class="message" id="message">
+
     </div>
-    <div class="icon-row">
+    <div class="icon-row" id="icon-row">
       <i class="fas fa-gift"></i>
       <i class="fas fa-champagne-glasses"></i>
       <i class="fas fa-party-horn"></i>
@@ -386,6 +396,111 @@
     }
 
     setInterval(createFirework, 500);
+    const icons = [
+      'fa-gift', 'fa-champagne-glasses', 'fa-party-horn', 'fa-music', 'fa-cocktail', 'fa-birthday-cake', 'fa-fire', 'fa-heart',   "fa-gift",
+  "fa-champagne-glasses",
+  "fa-party-horn",
+  "fa-music",
+  "fa-star",
+  "fa-snowflake",
+  "fa-heart",
+  "fa-glass-cheers",
+  "fa-cocktail",
+  "fa-fireworks",
+  "fa-trophy",
+  "fa-bell",
+  "fa-laugh",
+  "fa-sun",
+  "fa-moon",
+  "fa-tree",
+  "fa-cloud-sun",
+  "fa-camera",
+  "fa-calendar-alt",
+  "fa-drum",
+  "fa-birthday-cake",
+  "fa-guitar",
+  "fa-globe",
+  "fa-laptop",
+  "fa-headphones",
+  "fa-beer",
+  "fa-bicycle",
+  "fa-candle-holder",
+  "fa-car",
+  "fa-cloud",
+  "fa-piano",
+  "fa-umbrella",
+  "fa-video",
+  "fa-ticket-alt",
+  "fa-basketball-ball",
+  "fa-soccer-ball",
+  "fa-pizza-slice",
+  "fa-rocket",
+  "fa-apple-alt"
+    ];
+    function getRandomPrettyColor() {
+            const hue = Math.floor(Math.random() * 360);
+            const saturation = Math.floor(Math.random() * 50) + 50; // 50% to 100%
+            const lightness = Math.floor(Math.random() * 40) + 30; // 30% to 70%
+            return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+        }
+    function randomizeIcons() {
+      const iconRow = document.getElementById('icon-row');
+      iconRow.innerHTML = ''; // Clear existing icons
+      const randomIcons = [];
+
+      // Pick 3 random icons
+      while (randomIcons.length < 3) {
+        const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+        if (!randomIcons.includes(randomIcon)) {
+          randomIcons.push(randomIcon);
+        }
+      }
+
+      randomIcons.forEach(icon => {
+        const iconElement = document.createElement('i');
+        iconElement.className = `fas ${icon}`;
+        iconElement.style.color =  getRandomPrettyColor();
+        iconRow.appendChild(iconElement);
+      });
+    }
+
+    // Randomize message
+    const messages = [
+      "Wishing you joy and peace in 2025!",
+      "Cheers to a new year full of opportunities!",
+      "Let the celebrations begin!",
+      "Here’s to a fresh start in the new year!",
+      "Wishing you a year full of happiness and success!",
+  "May the new year bring you endless joy and prosperity!",
+  "Cheers to a fresh start and new opportunities!",
+  "Happy New Year! May 2025 be your best year yet!",
+  "May this year be filled with peace, love, and unforgettable moments!",
+  "Here's to a year of growth, adventure, and unforgettable memories!",
+  "New year, new dreams, new beginnings!",
+  "Wishing you a joyful, healthy, and prosperous New Year!",
+  "May 2025 bring you closer to your dreams!",
+  "Here's to a sparkling new year ahead filled with blessings!",
+  "May you find happiness and success in every corner of 2025!",
+  "Welcome 2025 with a heart full of hope and courage!",
+  "Happy New Year! Embrace the journey ahead with love and light!",
+  "Let this new year be the year you shine brighter than ever!",
+  "Cheers to new beginnings, endless possibilities, and cherished memories!",
+  "Wishing you peace, love, and laughter in the coming year!",
+  "May your year ahead be as bright as your dreams!",
+  "Step into the new year with confidence, joy, and excitement!",
+  "May every day of 2025 bring new opportunities and happiness!",
+  "Here's to another year of success, love, and making beautiful memories!"
+    ];
+
+    function randomizeMessage() {
+      const messageElement = document.getElementById('message');
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      messageElement.innerHTML = randomMessage + "<br/><br> Let's celebrate together";
+    }
+
+    // Initialize randomization
+    randomizeIcons();
+    randomizeMessage();
   </script>
 </body>
 </html>
